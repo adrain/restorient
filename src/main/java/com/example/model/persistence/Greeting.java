@@ -3,13 +3,11 @@
  */
 package com.example.model.persistence;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @author apinto
  *
  */
-@JsonIgnoreProperties(ignoreUnknown=true, value={"handler", "doc", "schemaClass", "document", "owners", "identity"})
 public class Greeting extends Entity {
 	
 	private String greetPhrase;
