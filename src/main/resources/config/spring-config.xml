@@ -51,4 +51,6 @@
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
 	
+	<import resource="classpath:config/jpa-config.xml"/>
+	
 </beans>

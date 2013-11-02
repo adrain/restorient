@@ -16,6 +16,10 @@ import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
 @Aspect
 public class DatabaseManager {
 	
+	static {
+		new OObjectDatabaseTx("memory:restorient").create();
+	}
+	
 	@SuppressWarnings("unused")
 	private String databaseConnectionURL;
 	
@@ -31,7 +35,8 @@ public class DatabaseManager {
 	private OObjectDatabaseTx objectDatabaseTx;
 	
 	public DatabaseManager() {
-		this("remote:localhost/restorient", "admin", "admin", "com.example.model.persistence");
+//		this("remote:localhost/restorient", "admin", "admin", "com.example.model.persistence");
+		this("memory:restorient", "admin", "admin", "com.example.model.persistence");
 	}
 
 	public DatabaseManager(final String databaseConnectionURL, final String username, final String password, String persistenceModelPackage) {
@@ -52,7 +57,7 @@ public class DatabaseManager {
 	
 	@Around("@annotation(com.example.persistence.OTransactional)")
 	public Object logMethodExectutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-		System.out.println("@@@"+joinPoint.getThis());
+		
 		getDatabaseTransaction().begin();
 		
 		Object retVal = joinPoint.proceed();
